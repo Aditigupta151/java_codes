@@ -1,0 +1,20 @@
+// java pattern
+// output pattern:
+/* 
+   *
+   **
+   ***
+   ****
+   *****
+*/
+
+// In this code we are not using any loop for pattern printing hence it is a basic level pattern printing.
+public class main{
+    public static void main(String args[]){
+        System.out.println("*");
+        System.out.println("**");
+        System.out.println("***");
+        System.out.println("****");
+        System.out.println("*****");
+    }
+}
