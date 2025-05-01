@@ -1,0 +1,37 @@
+// code for demonstrating the method of taking input(scanner).
+// creating student detail program
+
+import java.util.*; // importing the package
+class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println(" Enter Student detail:");
+        System.out.println("enter name:");
+        String name = sc.next(); // taking one word input
+        
+        System.out.println("enter your fullname:");
+        String fullname = sc.nextLine(); // taking whole line input
+        
+        
+        System.out.println("enter your age:");
+        int age = sc.nextInt();// taking int value input
+        
+        System.out.println("enter your height:");
+        float height = sc.nextFloat(); // taking float value input
+        
+        System.out.println("enter your marks");
+        double marks = sc.nextDouble(); // taking double value input
+        
+        // output of above inputs
+        System.out.println("Student details: ");
+        System.out.println(name + " is name of student");
+        System.out.println(fullname + " is full name of student");
+        System.out.println(age + " is age of student");
+        System.out.println(height + " is height of student");
+        System.out.println(marks + " is marks of student");
+        
+        
+        
+    }
+}
+        
