@@ -8,6 +8,6 @@ public class main{
    int a = sc.nextInt();
    int b = sc.nextInt();
    int sum = a + b;
-   system.out.println(sum);
+   System.out.println(sum);
   }
 }
