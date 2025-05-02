@@ -1,0 +1,12 @@
+// calculating area of circle by taking raduis as user input
+
+import java.util.*;
+public class main{
+  public static void main(String args[]){
+   Scanner sc = new Scanner(System.in);
+   System.out.println("enter raduis of circle:");
+   double rad = sc.nextDouble();
+   double area = 3.14*(rad)**2;
+   System.out.println("The area of circle is :" + area);
+  }
+}
