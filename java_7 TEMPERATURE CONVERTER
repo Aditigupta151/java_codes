@@ -1,0 +1,15 @@
+// program to convert temperature from celsuis to fahrenheit ( fah = cel x 9/5 +32)
+
+import java.util.*;
+public class converter{
+  public static void main(String args[]){
+   float celsiustemp;
+   float fahrenhiettemp;
+   Scanner sc = new Scanner(System.in);
+   System.out.println("enter temperature in celsius:");
+   celsiustemp = sc.nextFloat();
+   fahrenhiettemp = (celsiustemp* 9/5) +32;
+
+  System.out.println("temperature in fahrenheit:" + fahrenhiettemp + "F");
+}
+}
