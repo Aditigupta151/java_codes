@@ -1,0 +1,19 @@
+class Book {
+    private String title;
+
+    public void setTitle(String t) {
+        title = t;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Book b = new Book();
+        b.setTitle("Java for Beginners");
+        System.out.println("Book Title: " + b.getTitle());
+    }
+}
