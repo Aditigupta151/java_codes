@@ -1,0 +1,47 @@
+import java.util.Scanner;
+
+public class FuelEfficiencyCalculator {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        double fuelLiters, distanceKm;
+        System.out.print("Enter fuel consumed (in liters): ");
+        fuelLiters = scanner.nextDouble();
+        System.out.print("Enter distance traveled (in kilometers): ");
+        distanceKm = scanner.nextDouble();
+
+        double efficiencyKmPerLiter = distanceKm / fuelLiters;
+        double distanceMiles = distanceKm * 0.621371;
+        double fuelGallons = fuelLiters * 0.264172;
+        double efficiencyMpg = distanceMiles / fuelGallons;
+
+        System.out.println("\n--- Fuel Efficiency ---");
+        System.out.printf("Efficiency: %.2f km/L\n", efficiencyKmPerLiter);
+        System.out.printf("Efficiency: %.2f mpg\n", efficiencyMpg);
+
+        scanner.close();
+    }
+} import java.util.Scanner;
+
+public class FuelEfficiencyCalculator {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        double fuelLiters, distanceKm;
+        System.out.print("Enter fuel consumed (in liters): ");
+        fuelLiters = scanner.nextDouble();
+        System.out.print("Enter distance traveled (in kilometers): ");
+        distanceKm = scanner.nextDouble();
+
+        double efficiencyKmPerLiter = distanceKm / fuelLiters;
+        double distanceMiles = distanceKm * 0.621371;
+        double fuelGallons = fuelLiters * 0.264172;
+        double efficiencyMpg = distanceMiles / fuelGallons;
+
+        System.out.println("\n--- Fuel Efficiency ---");
+        System.out.printf("Efficiency: %.2f km/L\n", efficiencyKmPerLiter);
+        System.out.printf("Efficiency: %.2f mpg\n", efficiencyMpg);
+
+        scanner.close();
+    }
+}
