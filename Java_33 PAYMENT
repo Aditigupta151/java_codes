@@ -1,0 +1,112 @@
+import java.util.*;
+
+abstract class Payment {
+    double amount;
+
+    Payment(double amount) {
+        this.amount = amount;
+    }
+
+    abstract void processPayment();
+
+    void showDetails() {
+        System.out.println("Processing payment of Rs. " + amount);
+    }
+}
+
+class CreditCardPayment extends Payment {
+    String cardNumber;
+    int cvv;
+
+    CreditCardPayment(double amt, String cardNumber, int cvv) {
+        super(amt);
+        this.cardNumber = cardNumber;
+        this.cvv = cvv;
+    }
+
+    void processPayment() {
+        showDetails();
+        System.out.println("Paid using Credit Card ending with " + cardNumber.substring(cardNumber.length() - 4));
+    }
+}
+
+class DebitCardPayment extends Payment {
+    String cardNumber;
+    int pin;
+
+    DebitCardPayment(double amt, String cardNumber, int pin) {
+        super(amt);
+        this.cardNumber = cardNumber;
+        this.pin = pin;
+    }
+
+    void processPayment() {
+        showDetails();
+        System.out.println("Paid using Debit Card ending with " + cardNumber.substring(cardNumber.length() - 4));
+    }
+}
+
+class UPIPayment extends Payment {
+    String upiId;
+
+    UPIPayment(double amt, String upiId) {
+        super(amt);
+        this.upiId = upiId;
+    }
+
+    void processPayment() {
+        showDetails();
+        System.out.println("Paid using UPI ID: " + upiId);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Enter payment amount: ");
+        double amt = sc.nextDouble();
+        sc.nextLine(); // consume newline
+
+        System.out.println("Choose Payment Method:");
+        System.out.println("1. Credit Card");
+        System.out.println("2. Debit Card");
+        System.out.println("3. UPI");
+
+        int choice = sc.nextInt();
+        sc.nextLine();
+
+        Payment p = null;
+
+        switch (choice) {
+            case 1:
+                System.out.print("Enter Card Number: ");
+                String ccNumber = sc.nextLine();
+                System.out.print("Enter CVV: ");
+                int cvv = sc.nextInt();
+                p = new CreditCardPayment(amt, ccNumber, cvv);
+                break;
+            case 2:
+                System.out.print("Enter Card Number: ");
+                String dcNumber = sc.nextLine();
+                System.out.print("Enter PIN: ");
+                int pin = sc.nextInt();
+                p = new DebitCardPayment(amt, dcNumber, pin);
+                break;
+            case 3:
+                System.out.print("Enter UPI ID: ");
+                String upi = sc.nextLine();
+                p = new UPIPayment(amt, upi);
+                break;
+            default:
+                System.out.println("Invalid Choice.");
+                break;
+        }
+
+        if (p != null) {
+            p.processPayment();
+        }
+
+        sc.close();
+    }
+}
