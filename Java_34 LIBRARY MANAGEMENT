@@ -1,0 +1,103 @@
+import java.util.*;
+
+class Book {
+    String title;
+    String author;
+    boolean isAvailable = true;
+
+    Book(String title, String author) {
+        this.title = title;
+        this.author = author;
+    }
+
+    void displayInfo() {
+        System.out.println(title + " by " + author + (isAvailable ? " (Available)" : " (Borrowed)"));
+    }
+
+    boolean borrowBook() {
+        if (isAvailable) {
+            isAvailable = false;
+            return true;
+        }
+        return false;
+    }
+
+    void returnBook() {
+        isAvailable = true;
+    }
+}
+
+class User {
+    String name;
+    List<Book> borrowedBooks = new ArrayList<>();
+
+    User(String name) {
+        this.name = name;
+    }
+
+    void borrowBook(Book book) {
+        if (book.borrowBook()) {
+            borrowedBooks.add(book);
+            System.out.println(name + " borrowed " + book.title);
+        } else {
+            System.out.println(book.title + " is not available.");
+        }
+    }
+
+    void returnBook(Book book) {
+        if (borrowedBooks.remove(book)) {
+            book.returnBook();
+            System.out.println(name + " returned " + book.title);
+        } else {
+            System.out.println(name + " doesn't have " + book.title);
+        }
+    }
+
+    void viewBorrowedBooks() {
+        System.out.println(name + "'s Borrowed Books:");
+        for (Book b : borrowedBooks) {
+            System.out.println("- " + b.title);
+        }
+    }
+}
+
+class Library {
+    List<Book> bookList = new ArrayList<>();
+
+    void addBook(Book book) {
+        bookList.add(book);
+    }
+
+    void showAvailableBooks() {
+        System.out.println("Available Books in Library:");
+        for (Book b : bookList) {
+            if (b.isAvailable) {
+                b.displayInfo();
+            }
+        }
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Library lib = new Library();
+        Book b1 = new Book("The Alchemist", "Paulo Coelho");
+        Book b2 = new Book("1984", "George Orwell");
+        Book b3 = new Book("Java Basics", "John Doe");
+
+        lib.addBook(b1);
+        lib.addBook(b2);
+        lib.addBook(b3);
+
+        User user1 = new User("Alice");
+
+        lib.showAvailableBooks();
+        user1.borrowBook(b1);
+        user1.borrowBook(b2);
+        user1.viewBorrowedBooks();
+
+        lib.showAvailableBooks();
+        user1.returnBook(b1);
+        lib.showAvailableBooks();
+    }
+}
