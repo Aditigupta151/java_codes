@@ -1,0 +1,27 @@
+interface Printable {
+    void print();
+}
+// Second interface
+interface Showable {
+    void show();
+}
+// Class implementing both interfaces
+class Document implements Printable, Showable {
+    // Implementing print() from Printable
+    public void print() {
+        System.out.println("Printing document...");
+    }
+    // Implementing show() from Showable
+    public void show() {
+        System.out.println("Showing document...");
+    }
+}
+public class Main {
+    public static void main(String[] args) {
+        Document doc = new Document();
+        
+        // Call methods from both interfaces
+        doc.print();
+        doc.show();
+    }
+}
