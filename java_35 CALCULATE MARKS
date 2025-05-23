@@ -1,0 +1,23 @@
+import java.util.Scanner;
+public class MarksCalculator {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+// Declare an array to store marks
+        double[] marks = new double[5];
+        double total = 0;
+  // Input marks
+        System.out.println("Enter marks for 5 subjects:");
+        for (int i = 0; i < 5; i++) {
+            System.out.print("Subject " + (i + 1) + ": ");
+            marks[i] = scanner.nextDouble();
+            total += marks[i];  // Accumulate total
+        }
+
+        // Calculate average
+        double average = total / 5;
+  // Output results
+        System.out.println("\n====== RESULTS ======");
+        System.out.printf("Total Marks: %.2f\n", total);
+        System.out.printf("Average Marks: %.2f\n", average);
+    }
+}
