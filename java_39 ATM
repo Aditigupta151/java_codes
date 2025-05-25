@@ -1,0 +1,156 @@
+import java.util.*;
+
+class BankAccount {
+    private String accountNumber;
+    private String accountHolder;
+    private double balance;
+
+    public BankAccount(String accNum, String holder, double balance) {
+        this.accountNumber = accNum;
+        this.accountHolder = holder;
+        this.balance = balance;
+    }
+
+    public boolean withdraw(double amount) {
+        if (amount > balance) {
+            System.out.println("Insufficient balance!");
+            return false;
+        }
+        balance -= amount;
+        System.out.println("Withdrawn: $" + amount);
+        return true;
+    }
+
+    public void deposit(double amount) {
+        balance += amount;
+        System.out.println("Deposited: $" + amount);
+    }
+
+    public double getBalance() {
+        return balance;
+    }
+
+    public String getAccountHolder() {
+        return accountHolder;
+    }
+}
+
+class Card {
+    private String cardNumber;
+    private String pin;
+    private BankAccount linkedAccount;
+    private int attempts = 0;
+    private boolean locked = false;
+
+    public Card(String cardNumber, String pin, BankAccount account) {
+        this.cardNumber = cardNumber;
+        this.pin = pin;
+        this.linkedAccount = account;
+    }
+
+    public boolean validatePin(String inputPin) {
+        if (locked) {
+            System.out.println("Card is locked due to too many failed attempts.");
+            return false;
+        }
+
+        if (this.pin.equals(inputPin)) {
+            attempts = 0; // reset on success
+            return true;
+        } else {
+            attempts++;
+            System.out.println("Invalid PIN! Attempts: " + attempts);
+            if (attempts >= 3) {
+                locked = true;
+                System.out.println("Card locked due to too many failed attempts.");
+            }
+            return false;
+        }
+    }
+
+    public BankAccount getLinkedAccount() {
+        return linkedAccount;
+    }
+
+    public boolean isLocked() {
+        return locked;
+    }
+}
+
+class ATM {
+    private Card currentCard;
+
+    public void insertCard(Card card) {
+        if (card.isLocked()) {
+            System.out.println("Cannot insert card: card is locked.");
+            return;
+        }
+        currentCard = card;
+        System.out.println("Card inserted.");
+    }
+
+    public void enterPin(String pin) {
+        if (currentCard == null) {
+            System.out.println("No card inserted.");
+            return;
+        }
+
+        if (currentCard.validatePin(pin)) {
+            System.out.println("PIN accepted.");
+        } else {
+            System.out.println("PIN rejected.");
+            currentCard = null; // eject card on failed pin?
+        }
+    }
+
+    public void withdraw(double amount) {
+        if (currentCard == null) {
+            System.out.println("Insert card and enter PIN first.");
+            return;
+        }
+        BankAccount account = currentCard.getLinkedAccount();
+        if (account.withdraw(amount)) {
+            System.out.println("Please take your cash.");
+        }
+    }
+
+    public void deposit(double amount) {
+        if (currentCard == null) {
+            System.out.println("Insert card and enter PIN first.");
+            return;
+        }
+        currentCard.getLinkedAccount().deposit(amount);
+    }
+
+    public void checkBalance() {
+        if (currentCard == null) {
+            System.out.println("Insert card and enter PIN first.");
+            return;
+        }
+        double balance = currentCard.getLinkedAccount().getBalance();
+        System.out.println("Your balance is: $" + balance);
+    }
+
+    public void ejectCard() {
+        System.out.println("Card ejected.");
+        currentCard = null;
+    }
+}
+
+public class ATMMain {
+    public static void main(String[] args) {
+        BankAccount account = new BankAccount("123456", "Aditi", 5000);
+        Card card = new Card("987654321", "4321", account);
+        ATM atm = new ATM();
+
+        atm.insertCard(card);
+        atm.enterPin("4321");
+
+        atm.checkBalance();
+        atm.withdraw(1000);
+        atm.deposit(500);
+        atm.checkBalance();
+
+        atm.ejectCard();
+    }
+}
